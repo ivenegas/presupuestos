@@ -1,0 +1,221 @@
+﻿@model espaciodiseno.Models.proyectos
+
+
+@{
+    ViewBag.Title = "Details";
+
+}
+
+<h2>Proyecto @Model.pro_numero @Model.pro_nombre</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        
+        <dt>
+            Fecha
+        </dt>
+
+        <dd>
+            @Html.Label(Model.pro_fecha.ToShortDateString())
+        </dd>
+
+        <dt>
+           Numero
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pro_numero)
+        </dd>
+        <dt>
+           Nombre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pro_nombre)
+        </dd>
+
+        <dt>
+            Cliente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.clientes.cli_nombre)
+        </dd>
+
+        <dt>
+            Descripción
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pro_descripcion)
+        </dd>
+
+        <dt>
+            Plazo de entrega
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pro_plazo) Días hábiles
+        </dd>
+
+        <dt>
+            Condiciones de pago
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.condiciones_pago.con_nombre)
+        </dd>
+        <dt>
+            Estado del proyecto
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estados_proyectos.est_nombre)
+        </dd>
+        <dt>
+            Imagen
+        </dt>
+        <dd>
+            <img src="~/Content/img/@ViewBag.img" height="150" width="100" alt="Sin imagen" class="img-thumbnail" />
+        </dd>
+
+    </dl>
+</div>
+    
+<div class="form-group">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4>Presupuestos</h4>
+        </div>
+    </div>
+@using (Html.BeginForm("Editar","proyectos", FormMethod.Post))
+{
+     @Html.AntiForgeryToken()
+    <table class="table">
+       
+                <tr>
+                    <th>
+                        Presupuesto
+                    </th>
+                    <th>
+                        Total Mano de obra
+                    </th>
+                    <th>
+                        Total Materiales
+                    </th>
+                    <th>
+                        Total Fletes
+                    </th>
+                    <th>
+                        Total Montajes
+                    </th>
+                    <th>
+                        Gastos Varios
+                    </th>
+                    <th>
+                        Total neto
+                    </th>
+                    <th>
+                        Total MG Contibución
+                    </th>
+                    <th>
+                        Total Presupuesto
+                    </th>
+                </tr>
+@foreach (var nombre in ViewBag.presupuesto)
+{
+                <tr>
+                    <td>
+                        <label id="nom_pre">@nombre.pre_nombre</label>
+                    </td>
+                    <td>
+                        @nombre.pre_total_mo
+                    </td>
+                    <td>
+                        @nombre.total_materiales
+                    </td>
+                    <td>
+                        @nombre.pre_total_flete
+                    </td>
+                    <td>
+                        @nombre.pre_montaje
+                    </td>
+                    <td>
+                        @nombre.pre_varios
+                    </td>
+                    <td>
+                        @nombre.pre_total_neto
+                    </td>
+                    <td>
+                        @nombre.pre_total_ut
+                    </td>
+                    <td>
+                        @nombre.pre_total_bruto
+                    </td>
+                </tr>
+}
+        <tr></tr>
+                <tr class="panel-footer">
+                    <td>
+                        <strong>TOTALES</strong>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.pro_mo, new { htmlAttributes = new { @class = "form-control btn-xs", id = "pro_mo", @Value = ViewBag.sumamo, @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.pro_mo, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.pro_material, new { htmlAttributes = new { @class = "form-control btn-xs", id = "pro_material", @Value = ViewBag.sumamat, @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.pro_material, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.pro_flete, new { htmlAttributes = new { @class = "form-control btn-xs", id = "pro_flete", @Value = ViewBag.sumaflet, @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.pro_flete, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.pro_montaje, new { htmlAttributes = new { @class = "form-control btn-xs", id = "pro_montaje", @Value = ViewBag.sumamont, @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.pro_montaje, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.pro_varios, new { htmlAttributes = new { @class = "form-control btn-xs", id = "pro_varios", @Value = ViewBag.sumavar, @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.pro_varios, "", new { @class = "text-danger" })
+                    </td>
+
+                    <td>
+                        @Html.EditorFor(model => model.pro_neto, new { htmlAttributes = new { @class = "form-control btn-xs", id = "pro_neto", @Value = ViewBag.sumaneto, @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.pro_neto, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.pro_utilidad, new { htmlAttributes = new { @class = "form-control btn-xs", id = "pro_utilidad", @Value = ViewBag.sumamg, @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.pro_utilidad, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.pro_total_presupuesto, new { htmlAttributes = new { @class = "form-control btn-xs", id = "pro_total_presupuesto", @Value = ViewBag.sumapres, @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.pro_total_presupuesto, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+    </table>
+    <div>
+        <input type="button" value="(+) Agregar Presupuesto" class="btn btn-success" onclick="location.href='@Url.Action("Create", "presupuestos", new { id = Model.pro_id, numero = Model.pro_numero})'" />
+    </div>
+    <br />
+    <div>
+        <a href="@Url.Action("Editar", "proyectos", new { id = Model.pro_id, mo = @ViewBag.sumamo, mat = @ViewBag.sumamat , fle = @ViewBag.sumaflet, mon = @ViewBag.sumamont, va = ViewBag.sumavar, net = @ViewBag.sumaneto, mg = @ViewBag.sumamg, tot = @ViewBag.sumapres })" onclick="'editaria()'" class="btn btn-warning" id="cerrar">Cerrar Proyecto</a>
+    </div>
+}
+</div>
+
+<div class="form-group" id="ide">
+    @Html.LabelFor(model => model.pro_id, "id", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBox("mid", Model.pro_id, new { @readonly = "readonly", @class = "form-control", @Value = Model.pro_id })
+
+    </div>
+</div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/Scripts/proyectos.js")
+    }

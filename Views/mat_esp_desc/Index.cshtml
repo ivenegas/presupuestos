@@ -1,0 +1,57 @@
+﻿@model IEnumerable<espaciodiseno.Models.mat_esp_desc>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Materiales y descripciones</h2>
+
+<p>
+    <input type="button" value="(+) Agregar" class="btn btn-success" onclick="location.href='@Url.Action("Create", "mat_esp_desc" )'" />
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Codigo
+        </th>
+        <th>
+            Material
+        </th>
+        <th>
+            Detalle
+        </th>
+        <th>
+            Espesor
+        </th>
+        <th>
+            Valor
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.msd_codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.materias_primas.mat_nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.detalles.det_nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.espesores.esp_nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.msd_valor)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.msd_id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.msd_id })
+            </td>
+        </tr>
+    }
+
+</table>

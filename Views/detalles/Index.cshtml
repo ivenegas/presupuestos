@@ -1,0 +1,34 @@
+﻿@model IEnumerable<espaciodiseno.Models.detalles>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<h2>Detalles de materiales</h2>
+<p>
+    <input type="button" value="(+) Agregar" class="btn btn-success" onclick="location.href='@Url.Action("Create", "detalles" )'" />
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Detalle
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.det_nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.det_id }) |
+
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.det_id })
+            </td>
+        </tr>
+    }
+
+</table>

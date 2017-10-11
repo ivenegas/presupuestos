@@ -1,0 +1,61 @@
+﻿@model IEnumerable<espaciodiseno.Models.proyectos>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Proyectos</h2>
+
+<p>
+    <input type="button" value="(+) Agregar Proyecto" class="btn btn-success" onclick="location.href='@Url.Action("cargarImg", "proyectos")'" />
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Numero
+        </th>
+        <th>
+            Fecha
+        </th>
+        <th>
+           Nombre
+        </th>
+        <th>
+           Cliente
+        </th>
+        <th>
+            Estado
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.pro_numero)
+        </td>
+        <td>
+            @Html.Label(@item.pro_fecha.ToShortDateString())
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pro_nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.clientes.cli_nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estados_proyectos.est_nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Ver", "Details", new { id = item.pro_id, est = item.estados_proyectos.est_id, img = item.pro_img }) |
+            @Html.ActionLink("Editar", "Edit", new { id=item.pro_id, num = item.pro_numero, est = item.estados_proyectos.est_id, img = item.pro_img }) |
+           @* @Html.ActionLink("Eliminar", "Delete", new { id=item.pro_id }) |*@
+            @Html.ActionLink("Gastos reales", "create","gastos_reales", new { id = item.pro_id, num = item.pro_numero, est = item.estados_proyectos.est_id, nom = item.pro_nombre,
+                                                                       mo = item.pro_mo, mat = item.pro_material, fle = item.pro_flete, mon = item.pro_montaje, va = item.pro_varios,
+                                                                       net = item.pro_neto, uti = item.pro_utilidad, tot = item.pro_total_presupuesto}, null)
+        </td>
+    </tr>
+}
+
+</table>
+

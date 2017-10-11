@@ -1,0 +1,1184 @@
+﻿@model espaciodiseno.Models.presupuestos
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>presupuestos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_proyecto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_proyecto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat7)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat7)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat7)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat7)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat7)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat7)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut7)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut7)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat7)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat7)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat8)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat8)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat8)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat8)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat8)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat8)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut8)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut8)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat8)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat8)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat9)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat9)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat9)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat9)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat9)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat9)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut9)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut9)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat9)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat9)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat10)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat10)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat10)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat10)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat10)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat10)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut10)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut10)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat10)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat10)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat11)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat11)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat11)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat11)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat11)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat11)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut11)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut11)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat11)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat11)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat12)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat12)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat12)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat12)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat12)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat12)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut12)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut12)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat12)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat12)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat13)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat13)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat13)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat13)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat13)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat13)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut13)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut13)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat13)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat13)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat14)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat14)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat14)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat14)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat14)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat14)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut14)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut14)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat14)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat14)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_cantidad_mat15)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_cantidad_mat15)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_valor_mat15)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_valor_mat15)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_neto_mat15)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_neto_mat15)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_ut15)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_ut15)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_mat15)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_mat15)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_montaje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_montaje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_varios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_varios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_neto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_neto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_ut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_ut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pre_total_bruto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pre_total_bruto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles1.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles1.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles2.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles2.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles3.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles3.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles4.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles4.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles5.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles5.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles6.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles6.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles7.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles7.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles8.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles8.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles9.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles9.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles10.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles10.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles11.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles11.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles12.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles12.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles13.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles13.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.detalles14.det_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles14.det_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores1.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores1.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores2.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores2.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores3.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores3.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores4.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores4.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores5.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores5.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores6.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores6.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores7.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores7.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores8.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores8.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores9.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores9.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores10.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores10.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores11.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores11.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores12.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores12.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores13.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores13.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.espesores14.esp_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores14.esp_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fletes.fle_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fletes.fle_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mano_obras.man_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mano_obras.man_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mano_obras1.man_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mano_obras1.man_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc1.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc1.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc2.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc2.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc3.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc3.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc4.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc4.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc5.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc5.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc6.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc6.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc7.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc7.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc8.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc8.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc9.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc9.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc10.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc10.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc11.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc11.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc12.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc12.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc13.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc13.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mat_esp_desc14.msd_codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_esp_desc14.msd_codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas1.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas1.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas2.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas2.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas3.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas3.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas4.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas4.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas5.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas5.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas6.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas6.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas7.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas7.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas8.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas8.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas9.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas9.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas10.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas10.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas11.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas11.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas12.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas12.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas13.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas13.mat_nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.materias_primas14.mat_nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas14.mat_nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

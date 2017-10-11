@@ -1,0 +1,110 @@
+﻿@model espaciodiseno.Models.proyectos
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editar Proyecto N° @Model.pro_numero</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.pro_id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.pro_numero, "Numero de proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pro_numero, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.numeroE, @Readonly = "readonly"} })
+                @Html.ValidationMessageFor(model => model.pro_numero, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.pro_nombre, "Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pro_nombre, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre corto" } })
+                @Html.ValidationMessageFor(model => model.pro_nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.clientes.cli_nombre, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("pro_cliente", null, "--Seleccione--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.clientes.cli_nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.pro_fecha, "Fecha", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pro_fecha, new { htmlAttributes = new { @class = "form-control", placeholder = "AAAA/MM/DD" } }) <p><h6>(AAAA / MM / DD)</h6></p>
+                @Html.ValidationMessageFor(model => model.pro_fecha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.pro_descripcion, "Descripción", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.pro_descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pro_descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.pro_plazo, "Plazo de entrega", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pro_plazo, new { htmlAttributes = new { @class = "form-control", placeholder = "Días hábiles" } })<p>Días hábiles</p>
+                @Html.ValidationMessageFor(model => model.pro_plazo, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.pro_condicion, "Condiciones de pago", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("pro_condicion", null, "--Seleccione--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.pro_condicion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <p class="control-label col-md-2"><strong>Imagen:</strong></p>
+            <div class="col-md-10">
+                @if (!string.IsNullOrEmpty(ViewBag.img))
+                {
+                    <img src="~/Content/img/@ViewBag.img" height="200" width="150" alt="Sin imagen" class="img-thumbnail" />
+                }
+            </div>
+        </div>
+
+        <div class="form-group" id="imge">
+            @Html.LabelFor(model => model.pro_img, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pro_img, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.pro_img, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-success" /> |
+                <input type="button" value="Cancelar" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "proyectos")'" />
+
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/proyectos.js")
+
+
+}

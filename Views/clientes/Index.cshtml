@@ -1,0 +1,66 @@
+﻿@model IEnumerable<espaciodiseno.Models.clientes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Clientes</h2>
+
+<br />
+<p>
+    <input type="button" value="(+) Agregar nuevo cliente" class="btn btn-success" onclick="location.href='@Url.Action("Create", "clientes" )'" />
+</p>
+<table class="table">
+    <tr>
+    <tr>
+        <th>
+            Razón social
+        </th>
+        <th>
+            Rut
+        </th>
+        <th>
+            Contacto
+        </th>
+        <th>
+            Telefono
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Dirección
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cli_nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cli_rut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cli_contacto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cli_telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cli_correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cli_direccion)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.cli_id }) |
+
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.cli_id })
+            </td>
+        </tr>
+    }
+
+</table>

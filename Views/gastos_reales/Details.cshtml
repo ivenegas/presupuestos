@@ -1,0 +1,66 @@
+﻿@model espaciodiseno.Models.gastos_reales
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>gastos_reales</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.gas_mo_real)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gas_mo_real)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gas_mat_real)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gas_mat_real)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gas_flete_real)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gas_flete_real)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gas_montaje_real)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gas_montaje_real)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gas_varios_real)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gas_varios_real)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proyectos.pro_numero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proyectos.pro_numero)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.gas_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

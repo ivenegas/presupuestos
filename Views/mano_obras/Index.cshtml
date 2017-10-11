@@ -1,0 +1,39 @@
+﻿@model IEnumerable<espaciodiseno.Models.mano_obras>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Mano de Obra</h2>
+
+<p>
+    <input type="button" value="(+) Agregar" class="btn btn-success" onclick="location.href='@Url.Action("Create", "mano_obras" )'" />
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tipo
+        </th>
+        <th>
+            Valor
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.man_nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.man_valor)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.man_id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.man_id })
+            </td>
+        </tr>
+    }
+
+</table>

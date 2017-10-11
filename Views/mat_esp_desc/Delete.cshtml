@@ -1,0 +1,58 @@
+﻿@model espaciodiseno.Models.mat_esp_desc
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>¿Esta seguro de eliminar este material y sus descripciones?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Codigo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.msd_codigo)
+        </dd>
+        <dt>
+            Material
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.materias_primas.mat_nombre)
+        </dd>
+        <dt>
+            Detalle
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.detalles.det_nombre)
+        </dd>
+        <dt>
+            Espesor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.espesores.esp_nombre)
+        </dd>
+        <dt>
+            Valor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.msd_valor)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            <input type="button" value="Cancelar" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "mat_esp_desc" )'" />
+        </div>
+    }
+</div>

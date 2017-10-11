@@ -1,0 +1,39 @@
+﻿@model espaciodiseno.Models.mano_obras
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>¿Esta seguro de eliminar este tipo de mano de obra?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tipo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.man_nombre)
+        </dd>
+
+        <dt>
+            Valor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.man_valor)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            <input type="button" value="Cancelar" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "mano_obras" )'" />
+        </div>
+    }
+</div>

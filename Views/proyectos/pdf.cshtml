@@ -1,0 +1,168 @@
+﻿@model espaciodiseno.Models.proyectos
+
+@{
+    ViewBag.Title = "pdf";
+    Layout = "~/Views/Shared/_layout_pdf.cshtml";
+}
+
+<div>
+    <table>
+        <tr>
+            <td>
+                <img src="~/Content/img/logo_converted.png" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong> <i>Muebles & Stands</i></strong>
+            </td>
+        </tr>
+        <tr><td>ventas@espaciodiseno.cl</td></tr>
+        <tr>
+            <td>Telefonos: 232265124  /  +56 9 9829 42 57</td>
+        </tr>
+        <tr><td>RUT: 76.654.329-4</td></tr>
+        <tr><td>Nueva San Cristóbal 1279.</td></tr>
+        <tr><td>Independencia, Santiago.</td></tr>
+    </table>
+
+    <hr />
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                <strong>DOCUMENTO</strong>
+            </td>
+            <td>
+                <strong>NUMERO</strong>
+            </td>
+            <td>
+                <strong>FECHA</strong>
+            </td>
+            <td><strong>CLIENTE</strong></td>
+            <td><strong>PLAZO DE ENTREGA</strong></td>
+            <td><strong>CONDICIONES DE PAGO</strong></td>
+        </tr>
+        <tr>
+            <td>
+                Presupuesto
+            </td>
+            <td>
+                N° @Model.pro_numero
+            </td>
+            <td>
+                @Model.pro_fecha.ToShortDateString()
+            </td>
+            <td>@Model.clientes.cli_nombre</td>
+            <td>@Model.pro_plazo días hábiles</td>
+            <td>@Model.condiciones_pago.con_nombre</td>
+        </tr>
+    </table>
+    <br />
+    <table class="table table-bordered">
+        <tr>
+            <td><strong>ARTICULO</strong></td>
+            <td><strong>DESCRIPCION</strong></td>
+            <td><strong>TOTAL</strong></td>
+        </tr>
+        <tr>
+            <td>@Model.pro_nombre</td>
+            <td width="900px" height="300px"><img src="~/Content/img/@Model.pro_img" height="200" width="150" alt="Sin imagen" class="img-thumbnail" />  -   @Model.pro_descripcion </td>
+            <td>@ViewBag.sumapres</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><strong>Total Cotización </strong></td>
+            
+            <td><strong>@ViewBag.sumapres</strong></td>
+            
+        </tr>
+    </table>
+    <br />
+    @if (!ViewBag.pdf)
+    {
+    <a href="@Url.Action("generarPdf", "proyectos", new { id = Model.pro_id })" target="_blank" class="btn btn-success" >Generar PDF</a>
+    <a href="@Url.Action("Index", "proyectos", new { id = Model.pro_id })"  class="btn btn-warning">Volver</a>
+
+    }
+    <div id="letras">
+        <h5><strong>OBSERVACIONES</strong></h5>
+        <hr />
+        <table>
+            <tr>
+                <td><strong>Los valores más IVA</strong></td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Cualquier cambio posterior a esta cotización, esta sujeto variaciones de precios, según corresponda.</strong>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Cualquier montaje y desmontaje fuera del horario laboral tiene un recargo del 30%.</strong>
+                </td>
+            </tr>
+
+        </table>
+
+        <hr />
+        <p>
+            1.-La presente cotización tiene una validez de 10 días contados desde su emisión. ESPACIO DISEÑO LTDA. enviará la cotización mediante envío
+
+            de correo electrónico o por correo certificado. El plazo que se contará a
+
+            partir de las 48 horas de recibido para despacho de correo. Todo plazo que exceda de
+
+            los señalados, hacen caduca la cotización en su forma y fondo, debiendo prosperar a
+
+            su respecto con una nueva cotización.
+        </p>
+
+        <p>
+            2.-La aceptación de la presente cotización se entiende hecha en forma pura y
+
+            simple, cualquier cambio propuesto por el aceptante o quien sus derechos
+
+            representen, se tomará como una nueva cotización, a la cual se le deberán hacer las
+
+            modificaciones correspondientes, en cuanto forma y precio de los servicios.
+        </p>
+
+        <p>
+            3.-La aceptación de la cotización, en términos concretos, sea esta de forma pura
+
+            y simple o nueva cotización por efecto de modificaciones según punto dos anterior,
+
+            una vez aceptada, el aceptante o quien represente sus derechos, deberá
+
+            diligentemente proveer una orden de compra a ESPACIO DISEÑO LTDA., por los
+
+            conceptos aceptados y cotizados, incluyendo en ella el número de la cotización
+
+            aceptada, además, cancelar un abono consistente en un 50 %, del valor de los servicios
+
+            contratados, y el saldo de 50%, de los mismos según la fecha sugerida y acordada en el
+
+            ítem "CONDICIONES DE PAGO" de esta cotización.
+        </p>
+
+        <p>
+            4.- La aceptación de la cotización en los términos del punto tres anterior, obliga
+
+            al aceptante o a quien sus derechos representa, a cumplir con las fechas de recepción
+
+            de los servicios cotizados y aceptados, salvo el aviso por medios idóneos de la
+
+            suspensión de la fecha para la entrega de los servicios, en un plazo no inferior a 10
+
+            días hábiles de la fecha de entrega de los mismos. La falta de aviso exonera de
+
+            responsabilidades a ESPACIO DISEÑO LTDA., y hace responsable al aceptante o a
+
+            quien sus derechos representen, del pago total de saldo de precio del valor de los
+
+            servicios cotizados, pago que se deberá realizar en el plazo estipulado para el pago del
+
+            saldo en el Ítem "CONDICIONES DE PAGO".
+        </p>
+    </div>
+</div>

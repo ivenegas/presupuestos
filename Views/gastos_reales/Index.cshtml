@@ -1,0 +1,63 @@
+﻿@model IEnumerable<espaciodiseno.Models.gastos_reales>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.gas_mo_real)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gas_mat_real)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gas_flete_real)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gas_montaje_real)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gas_varios_real)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.proyectos.pro_numero)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.gas_mo_real)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gas_mat_real)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gas_flete_real)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gas_montaje_real)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gas_varios_real)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.proyectos.pro_numero)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.gas_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.gas_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.gas_id })
+        </td>
+    </tr>
+}
+
+</table>

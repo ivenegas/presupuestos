@@ -1,0 +1,31 @@
+﻿@model espaciodiseno.Models.materias_primas
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>¿Esta seguro de eliminar este material?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Material
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mat_nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            <input type="button" value="Cancelar" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "materias_primas" )'" />
+        </div>
+    }
+</div>

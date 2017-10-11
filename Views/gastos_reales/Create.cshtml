@@ -1,0 +1,219 @@
+﻿@model espaciodiseno.Models.gastos_reales
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h3>Gastos presupuestos y gastos reales proyecto n° @ViewBag.numpro</h3>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        @*OCULTO*@
+        <div class="form-group" id="idpro">
+            @Html.LabelFor(model => model.gas_id_proyecto, "ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.gas_id_proyecto, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.idpro } })
+                @Html.ValidationMessageFor(model => model.gas_id_proyecto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.gas_id, "ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.gas_id, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.idpro } })
+                @Html.ValidationMessageFor(model => model.gas_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <table class="table table-bordered" cellspacing="10">
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.gas_id_proyecto, "Proyecto", htmlAttributes: new { @class = "control-label" })
+                </td>
+                <td>
+                   @ViewBag.nombre 
+                </td>
+
+            </tr>
+        </table>
+
+            <table class="table table-bordered" cellspacing="10">
+                <tr>
+                    <th>
+                        Item
+                    </th>
+                    <th>
+                        Presupuesto
+                    </th>
+                    <th>
+                        Real
+                    </th>
+                    <th>
+                        Diferencia
+                    </th>
+                </tr>
+@foreach (var nombre in ViewBag.presupuesto)
+{
+                <tr>
+                    <td>
+                        <p><strong>Mano de Obra</strong></p>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_mo_pre, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.mo, @Readonly = "readonly", id = "gas_mo_pre" } })
+                        @Html.ValidationMessageFor(model => model.gas_mo_pre, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_mo_real, new { htmlAttributes = new { @class = "form-control", id = "gas_mo_real", @Value = @nombre.gas_mo_real } })
+                        @Html.ValidationMessageFor(model => model.gas_mo_real, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        <input type="number" id="modif" disabled class="form-control" />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <p><strong>Materiales</strong></p>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_mat_pre, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.mat, @Readonly = "readonly", id = "gas_mat_pre" } })
+                        @Html.ValidationMessageFor(model => model.gas_mat_pre, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_mat_real, new { htmlAttributes = new { @class = "form-control", id = "gas_mat_real", @Value = @nombre.gas_mat_real } })
+                        @Html.ValidationMessageFor(model => model.gas_mat_real, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        <input type="number" id="matdif" disabled class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><strong>Montaje</strong></p>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_montaje_pre, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.mon, @Readonly = "readonly", id = "gas_montaje_pre" } })
+                        @Html.ValidationMessageFor(model => model.gas_montaje_pre, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_montaje_real, new { htmlAttributes = new { @class = "form-control", id = "gas_montaje_real", @Value = @nombre.gas_montaje_real } })
+                        @Html.ValidationMessageFor(model => model.gas_montaje_real, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        <input type="number" id="mondif" disabled class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><strong>Flete</strong></p>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_flete_pre, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.fle, @Readonly = "readonly", id = "gas_flete_pre" } })
+                        @Html.ValidationMessageFor(model => model.gas_flete_pre, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_flete_real, new { htmlAttributes = new { @class = "form-control", id = "gas_flete_real", @Value = @nombre.gas_flete_real } })
+                        @Html.ValidationMessageFor(model => model.gas_flete_real, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        <input type="number" id="fledif" disabled class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><strong>Gastos varios</strong></p>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_varios_pre, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.va, @Readonly = "readonly", id = "gas_varios_pre" } })
+                        @Html.ValidationMessageFor(model => model.gas_varios_pre, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_varios_real, new { htmlAttributes = new { @class = "form-control", id = "gas_varios_real", @Value = @nombre.gas_varios_real } })
+                        @Html.ValidationMessageFor(model => model.gas_varios_real, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        <input type="number" id="vadif" disabled class="form-control" />
+                    </td>
+                </tr>
+                <tr id="neto">
+                    <td>
+                        <p><strong>Neto</strong></p>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_neto_pre, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.net, @Readonly = "readonly", id = "gas_neto_pre" } })
+                        @Html.ValidationMessageFor(model => model.gas_neto_pre, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_neto_real, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.gas_neto_real, "", new { @class = "text-danger", id = "gas_neto_real", @Value = @nombre.gas_neto_real })
+
+                    </td>
+                    <td>
+                        <input type="number" id="netdif" disabled class="form-control" />
+                    </td>
+                </tr>
+                <tr id="uti">
+                    <td>
+                        <p><strong>Utilidad</strong></p>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_uti_pre, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.uti, @Readonly = "readonly", id = "gas_uti_pre" } })
+                        @Html.ValidationMessageFor(model => model.gas_uti_pre, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_uti_real, new { htmlAttributes = new { @class = "form-control", id = "gas_uti_real", @Value = @nombre.gas_uti_real } })
+                        @Html.ValidationMessageFor(model => model.gas_uti_real, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        <input type="number" id="utidif" disabled class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p><strong>Total presupuesto</strong></p>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_total_pre, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.tot, @Readonly = "readonly", id = "gas_total_pre" } })
+                        @Html.ValidationMessageFor(model => model.gas_total_pre, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.gas_total_real, new { htmlAttributes = new { @class = "form-control", id = "gas_total_real", @Readonly = "readonly", @Value = @nombre.gas_total_real } })
+                        @Html.ValidationMessageFor(model => model.gas_total_real, "", new { @class = "text-danger" })
+
+                    </td>
+                    <td>
+                        <input type="number" id="totdif" disabled class="form-control" />
+                    </td>
+                </tr>
+}
+            </table>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Guardar" class="btn btn-success" /> |
+                    <input type="button" value="Cancelar" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "proyectos")'" />
+
+                </div>
+            </div>
+</div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/gastos_reales.js")
+}

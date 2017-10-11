@@ -1,0 +1,31 @@
+﻿@model espaciodiseno.Models.condiciones_pago
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>¿Esta seguro de eliminar esta condición de pago?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Condiciones
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.con_nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            <input type="button" value="Cancelar" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "condiciones_pago" )'" />
+        </div>
+    }
+</div>

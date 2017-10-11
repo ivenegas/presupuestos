@@ -1,0 +1,69 @@
+﻿@model espaciodiseno.Models.proyectos
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Esta seguro de eliminar este proyecto N° @Model.pro_numero</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Numero
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pro_numero)
+        </dd>
+
+        <dt>
+            Fecha
+        </dt>
+
+        <dd>
+           @Html.Label(Model.pro_fecha.ToShortDateString())
+        </dd>
+
+        <dt>
+            Descripción
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pro_descripcion)
+        </dd>
+
+        <dt>
+            PLazo de entrega
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pro_plazo) Días hábiles
+        </dd>
+        <dt>
+            Cliente
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.clientes.cli_nombre)
+        </dd>
+
+        <dt>
+            Condiciones de pago
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.condiciones_pago.con_nombre)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            <input type="button" value="Cancelar" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "proyectos" )'" />
+        </div>
+    }
+</div>

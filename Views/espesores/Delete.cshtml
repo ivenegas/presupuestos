@@ -1,0 +1,31 @@
+﻿@model espaciodiseno.Models.espesores
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>¿Esta seguro de eliminar este espesor de materiales?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Espesor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.esp_nombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Guardar" class="btn btn-success" /> |
+            <input type="button" value="Cancelar" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "espesores" )'" />
+        </div>
+    }
+</div>

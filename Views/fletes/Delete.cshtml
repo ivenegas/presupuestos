@@ -1,0 +1,47 @@
+﻿@model espaciodiseno.Models.fletes
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>¿Esta seguro de eliminar este flete?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Contacto Flete
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fle_nombre)
+        </dd>
+        <dt>
+            Telefono
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fle_telefono)
+        </dd>
+
+        <dt>
+            Valor
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fle_valor)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            <input type="button" value="Cancelar" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "fletes" )'" />
+        </div>
+    }
+</div>

@@ -1,0 +1,73 @@
+﻿@model espaciodiseno.Models.clientes
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar</h2>
+
+<h3>¿Esta seguro de eliminar el siguiente Cliente?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Rut
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cli_rut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cli_nombre)
+        </dt>
+
+        <dd>
+            Razon Social
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cli_contacto)
+        </dt>
+
+        <dd>
+            Contacto
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cli_telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cli_telefono)
+        </dd>
+
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cli_correo)
+        </dd>
+
+        <dt>
+            Dirección
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cli_direccion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            <input type="button" value="Cancelar" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "clientes" )'" />
+        </div>
+    }
+</div>

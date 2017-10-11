@@ -1,0 +1,46 @@
+﻿@model IEnumerable<espaciodiseno.Models.fletes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Fletes</h2>
+
+<p>
+    <input type="button" value="(+) Agregar" class="btn btn-success" onclick="location.href='@Url.Action("Create", "fletes" )'" />
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nombre Contacto
+        </th>
+        <th>
+            Telefono
+        </th>
+        <th>
+            Valor
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fle_nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fle_telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fle_valor)
+            </td>
+
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.fle_id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.fle_id })
+            </td>
+        </tr>
+    }
+
+</table>

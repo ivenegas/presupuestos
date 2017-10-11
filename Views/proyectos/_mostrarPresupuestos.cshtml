@@ -1,0 +1,11 @@
+﻿@model IEnumerable<espaciodiseno.Models.presupuestos>
+
+<div class="list-group">
+    @foreach (var item in Model)
+    {
+        <a data-url="@Url.Content(string.Format("~/proyectos/_mostrarPresupuestos/{0}", item.pre_id))"
+           class="list-group-item">
+            @item.pre_nombre
+        </a>
+    }
+</div>

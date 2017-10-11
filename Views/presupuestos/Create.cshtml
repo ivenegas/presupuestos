@@ -1,0 +1,1261 @@
+﻿@model espaciodiseno.Models.presupuestos
+
+@{
+    ViewBag.Title = "Create";
+}
+<br />
+<h4>Ingresar nuevo presupuesto para Proyecto N° @ViewBag.numProyecto </h4>
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @*Oculto*@
+        <div class="form-group" id="proyecto">
+            @Html.LabelFor(model => model.pre_proyecto, "Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pre_proyecto, new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.proyecto } })
+                @Html.ValidationMessageFor(model => model.pre_proyecto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="">
+            @Html.LabelFor(model => model.pre_nombre, "Nombre presupuesto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pre_nombre, new { htmlAttributes = new { @class = "form-control" } })<i>*Obligatorio</i>
+                @Html.ValidationMessageFor(model => model.pre_nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>Mano de Obra</h4>
+            </div>
+            <div class="table table-responsive">
+                @* TABLA MAESTRO*@
+                <table cellpadding="10" id="tab_moma">
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>Cantidad</th>
+                        <th>Neto</th>
+                        <th>Margen de contribución</th>
+                        <th>Total diario</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mano_maestro", null, htmlAttributes: new { @class = "form-control", id = "mo1" })
+                            @Html.ValidationMessageFor(model => model.pre_mano_maestro, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="valor_moma" placeholder="Valor" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control col-xs-2" id="cant_moma" placeholder="Cantidad" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="neto_moma" placeholder="Neto" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="uti_moma" value="35" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="tot_moma"  placeholder="Total Diario" />
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="chk_dia" /> Días
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="cant_diama" placeholder="Cantidad de días" value="1" />
+                        </td>
+                        <td>
+                            <label id="dias">Día(s)</label>
+                        </td>
+                        <td>
+                            <input type="number" id="total_dia" hidden />
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="chk_sem" /> Semanas
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="cant_sema" placeholder="Cantidad de semanas" />
+                        </td>
+                        <td>
+                            <label id="seman">Semana(s)</label>
+                        </td>
+                        <td>
+                            <input type="number" id="total_semana" hidden />
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="total_moma" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_moay" onclick="'mos_moay()'"  value="(+) Agregar ayudante" />
+                        </td>
+                    </tr>
+                </table>
+                @* TABLA AYUDANTE*@
+                <table cellpadding="10" id="tab_moay">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mano_ayudante", null, htmlAttributes: new { @class = "form-control", id = "mo2" })
+                            @Html.ValidationMessageFor(model => model.pre_mano_ayudante, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="valor_moay" placeholder="Valor" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control col-xs-2" id="cant_moay" placeholder="Cantidad" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="neto_moay" placeholder="Neto" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="uti_moay" value="35" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="tot_moay" placeholder="Total Diario" />
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="chk_diamoay" /> Días
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="cant_diamoay" placeholder="Cantidad de días" value="1" />
+                        </td>
+                        <td>
+                            <label id="diasmoay">Día(s)</label>
+                        </td>
+                        <td>
+                            <input type="number" id="total_diamoay" hidden />
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="chk_semmoay" /> Semanas
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="cant_semamoay" placeholder="Cantidad de semanas" />
+                        </td>
+                        <td>
+                            <label id="semanmoay">Semana(s)</label>
+                        </td>
+                        <td>
+                            <input type="number" id="total_semanamoay" hidden />
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="total_moay" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_moay" onclick="'eli_moay()'" value="(-) Eliminar ayudante" />
+                        </td>
+                    </tr>
+                </table>
+                <table cellpadding="10" id="total_mo" align="right">
+                    <tr>
+                        <td><h5><strong> MANO DE OBRA</strong></h5></td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mo, new { htmlAttributes = new { @class = "form-control", id = "pre_total_mo" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mo, "", new { @class = "text-danger" })
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br />
+        <br />
+
+        @* MATERIALES*@
+
+        @*MAT1*@
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>Materiales</h4>
+            </div>
+            <div class="table table-responsive">
+                <table cellpadding="10" id="tab_mat1">
+                    <tr>
+                        <th>Material</th>
+                        <th>Detalle</th>
+                        <th>Espesor</th>
+                        <th>Valor</th>
+                        <th>Cantidad</th>
+                        <th>Neto</th>
+                        <th>Margen de contribución</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat", null, "---", htmlAttributes: new { @class = "form-control", id = "mat1" })
+                            @Html.ValidationMessageFor(model => model.pre_mat, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat1" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat1" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat, new { htmlAttributes = new { @class = "form-control", id = "val_mat1", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat, new { htmlAttributes = new { @class = "form-control", id = "can_mat1", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat, new { htmlAttributes = new { @class = "form-control", id = "net_mat1", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut, new { htmlAttributes = new { @class = "form-control", id = "uti_mat1", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat, new { htmlAttributes = new { @class = "form-control", id = "tot_mat1" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat1" onclick="'eli_mat1()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat1" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat2" onclick="'mos_mat2()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT2 *@
+                <table cellpadding="10" id="tab_mat2">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat2", null, "---", htmlAttributes: new { @class = "form-control", id = "mat2" })
+                            @Html.ValidationMessageFor(model => model.pre_mat2, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat2", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat2" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat2, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat2", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat2" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat2, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat2, new { htmlAttributes = new { @class = "form-control", id = "val_mat2", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat2, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat2, new { htmlAttributes = new { @class = "form-control", id = "can_mat2", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat2, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat2, new { htmlAttributes = new { @class = "form-control", id = "net_mat2", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat2, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut2, new { htmlAttributes = new { @class = "form-control", id = "uti_mat2", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut2, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat2, new { htmlAttributes = new { @class = "form-control", id = "tot_mat2" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat2, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat2" onclick="'eli_mat2()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat2" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat3" onclick="'mos_mat3()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 3 *@
+                <table cellpadding="10" id="tab_mat3">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat3", null, "---", htmlAttributes: new { @class = "form-control", id = "mat3" })
+                            @Html.ValidationMessageFor(model => model.pre_mat3, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat3", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat3" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat3, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat3", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat3" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat3, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat3, new { htmlAttributes = new { @class = "form-control", id = "val_mat3", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat3, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat3, new { htmlAttributes = new { @class = "form-control", id = "can_mat3", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat3, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat3, new { htmlAttributes = new { @class = "form-control", id = "net_mat3", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat3, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut3, new { htmlAttributes = new { @class = "form-control", id = "uti_mat3", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut3, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat3, new { htmlAttributes = new { @class = "form-control", id = "tot_mat3" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat3, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat3" onclick="'eli_mat3()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat3" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat4" onclick="'mos_mat4()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 4 *@
+                <table cellpadding="10" id="tab_mat4">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat4", null, "---", htmlAttributes: new { @class = "form-control", id = "mat4" })
+                            @Html.ValidationMessageFor(model => model.pre_mat4, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat4", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat4" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat4, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat4", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat4" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat4, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat4, new { htmlAttributes = new { @class = "form-control", id = "val_mat4", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat4, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat4, new { htmlAttributes = new { @class = "form-control", id = "can_mat4", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat4, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat4, new { htmlAttributes = new { @class = "form-control", id = "net_mat4", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat4, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut4, new { htmlAttributes = new { @class = "form-control", id = "uti_mat4", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut4, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat4, new { htmlAttributes = new { @class = "form-control", id = "tot_mat4" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat4, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat4" onclick="'eli_mat4()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat4" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat5" onclick="'mos_mat5()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 5 *@
+                <table cellpadding="10" id="tab_mat5">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat5", null, "---", htmlAttributes: new { @class = "form-control", id = "mat5" })
+                            @Html.ValidationMessageFor(model => model.pre_mat5, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat5", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat5" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat5, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat5", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat5" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat5, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat5, new { htmlAttributes = new { @class = "form-control", id = "val_mat5", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat5, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat5, new { htmlAttributes = new { @class = "form-control", id = "can_mat5", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat5, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat5, new { htmlAttributes = new { @class = "form-control", id = "net_mat5", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat5, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut5, new { htmlAttributes = new { @class = "form-control", id = "uti_mat5", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut5, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat5, new { htmlAttributes = new { @class = "form-control", id = "tot_mat5" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat5, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat5" onclick="'eli_mat5()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat5" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat6" onclick="'mos_mat6()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 6 *@
+                <table cellpadding="10" id="tab_mat6">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat6", null, "---", htmlAttributes: new { @class = "form-control", id = "mat6" })
+                            @Html.ValidationMessageFor(model => model.pre_mat6, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat6", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat6" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat6, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat6", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat6" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat6, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat6, new { htmlAttributes = new { @class = "form-control", id = "val_mat6", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat6, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat6, new { htmlAttributes = new { @class = "form-control", id = "can_mat6", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat6, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat6, new { htmlAttributes = new { @class = "form-control", id = "net_mat6", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat6, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut6, new { htmlAttributes = new { @class = "form-control", id = "uti_mat6", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut6, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat6, new { htmlAttributes = new { @class = "form-control", id = "tot_mat6" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat6, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat6" onclick="'eli_mat6()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat6" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat7" onclick="'mos_mat7()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 7 *@
+                <table cellpadding="10" id="tab_mat7">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat7", null, "---", htmlAttributes: new { @class = "form-control", id = "mat7" })
+                            @Html.ValidationMessageFor(model => model.pre_mat7, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat7", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat7" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat7, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat7", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat7" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat7, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat7, new { htmlAttributes = new { @class = "form-control", id = "val_mat7", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat7, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat7, new { htmlAttributes = new { @class = "form-control", id = "can_mat7", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat7, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat7, new { htmlAttributes = new { @class = "form-control", id = "net_mat7", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat7, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut7, new { htmlAttributes = new { @class = "form-control", id = "uti_mat7", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut7, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat7, new { htmlAttributes = new { @class = "form-control", id = "tot_mat7" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat7, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat7" onclick="'eli_mat7()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat7" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat8" onclick="'mos_mat8()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 8 *@
+                <table cellpadding="10" id="tab_mat8">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat8", null, "---", htmlAttributes: new { @class = "form-control", id = "mat8" })
+                            @Html.ValidationMessageFor(model => model.pre_mat8, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat8", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat8" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat8, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat8", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat8" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat8, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat8, new { htmlAttributes = new { @class = "form-control", id = "val_mat8", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat8, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat8, new { htmlAttributes = new { @class = "form-control", id = "can_mat8", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat8, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat8, new { htmlAttributes = new { @class = "form-control", id = "net_mat8", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat8, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut8, new { htmlAttributes = new { @class = "form-control", id = "uti_mat8", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut8, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat8, new { htmlAttributes = new { @class = "form-control", id = "tot_mat8" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat8, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat8" onclick="'eli_mat8()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat8" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat9" onclick="'mos_mat9()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 9 *@
+                <table cellpadding="10" id="tab_mat9">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat9", null, "---", htmlAttributes: new { @class = "form-control", id = "mat9" })
+                            @Html.ValidationMessageFor(model => model.pre_mat9, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat9", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat9" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat9, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat9", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat9" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat9, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat9, new { htmlAttributes = new { @class = "form-control", id = "val_mat9", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat9, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat9, new { htmlAttributes = new { @class = "form-control", id = "can_mat9", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat9, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat9, new { htmlAttributes = new { @class = "form-control", id = "net_mat9", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat9, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut9, new { htmlAttributes = new { @class = "form-control", id = "uti_mat9", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut9, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat9, new { htmlAttributes = new { @class = "form-control", id = "tot_mat9" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat9, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat9" onclick="'eli_mat9()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat9" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat10" onclick="'mos_mat10()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 10 *@
+                <table cellpadding="10" id="tab_mat10">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat10", null, "---", htmlAttributes: new { @class = "form-control", id = "mat10" })
+                            @Html.ValidationMessageFor(model => model.pre_mat10, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat10", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat10" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat10, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat10", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat10" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat10, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat10, new { htmlAttributes = new { @class = "form-control", id = "val_mat10", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat10, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat10, new { htmlAttributes = new { @class = "form-control", id = "can_mat10", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat10, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat10, new { htmlAttributes = new { @class = "form-control", id = "net_mat10", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat10, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut10, new { htmlAttributes = new { @class = "form-control", id = "uti_mat10", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut10, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat10, new { htmlAttributes = new { @class = "form-control", id = "tot_mat10" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat10, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat10" onclick="'eli_mat10()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat10" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat11" onclick="'mos_mat11()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 11 *@
+                <table cellpadding="10" id="tab_mat11">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat11", null, "---", htmlAttributes: new { @class = "form-control", id = "mat11" })
+                            @Html.ValidationMessageFor(model => model.pre_mat11, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat11", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat11" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat11, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat11", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat11" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat11, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat11, new { htmlAttributes = new { @class = "form-control", id = "val_mat11", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat11, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat11, new { htmlAttributes = new { @class = "form-control", id = "can_mat11", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat11, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat11, new { htmlAttributes = new { @class = "form-control", id = "net_mat11", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat11, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut11, new { htmlAttributes = new { @class = "form-control", id = "uti_mat11", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut11, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat11, new { htmlAttributes = new { @class = "form-control", id = "tot_mat11" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat11, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat11" onclick="'eli_mat11()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat11" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat12" onclick="'mos_mat12()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 12 *@
+                <table cellpadding="10" id="tab_mat12">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat12", null, "---", htmlAttributes: new { @class = "form-control", id = "mat12" })
+                            @Html.ValidationMessageFor(model => model.pre_mat12, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat12", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat12" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat12, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat12", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat12" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat12, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat12, new { htmlAttributes = new { @class = "form-control", id = "val_mat12", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat12, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat12, new { htmlAttributes = new { @class = "form-control", id = "can_mat12", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat12, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat12, new { htmlAttributes = new { @class = "form-control", id = "net_mat12", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat12, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut12, new { htmlAttributes = new { @class = "form-control", id = "uti_mat12", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut12, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat12, new { htmlAttributes = new { @class = "form-control", id = "tot_mat12" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat12, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat12" onclick="'eli_mat12()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat12" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat13" onclick="'mos_mat13()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 13 *@
+                <table cellpadding="10" id="tab_mat13">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat13", null, "---", htmlAttributes: new { @class = "form-control", id = "mat13" })
+                            @Html.ValidationMessageFor(model => model.pre_mat13, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat13", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat13" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat13, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat13", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat13" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat13, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat13, new { htmlAttributes = new { @class = "form-control", id = "val_mat13", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat13, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat13, new { htmlAttributes = new { @class = "form-control", id = "can_mat13", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat13, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat13, new { htmlAttributes = new { @class = "form-control", id = "net_mat13", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat13, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut13, new { htmlAttributes = new { @class = "form-control", id = "uti_mat13", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut13, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat13, new { htmlAttributes = new { @class = "form-control", id = "tot_mat13" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat13, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat13" onclick="'eli_mat13()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat13" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat14" onclick="'mos_mat14()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 14 *@
+                <table cellpadding="10" id="tab_mat14">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat14", null, "---", htmlAttributes: new { @class = "form-control", id = "mat14" })
+                            @Html.ValidationMessageFor(model => model.pre_mat14, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat14", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat14" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat14, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat14", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat14" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat14, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat14, new { htmlAttributes = new { @class = "form-control", id = "val_mat14", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat14, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat14, new { htmlAttributes = new { @class = "form-control", id = "can_mat14", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat14, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat14, new { htmlAttributes = new { @class = "form-control", id = "net_mat14", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat14, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut14, new { htmlAttributes = new { @class = "form-control", id = "uti_mat14", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut14, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat14, new { htmlAttributes = new { @class = "form-control", id = "tot_mat14" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat14, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat14" onclick="'eli_mat14()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat14" class="form-control" disabled />
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-success btn-xs" id="mos_mat15" onclick="'mos_mat15()'" value="(+)Material" />
+                        </td>
+                    </tr>
+                </table>
+                @* MAT 15 *@
+                <table cellpadding="10" id="tab_mat15">
+                    <tr>
+                        <td>
+                            @Html.DropDownList("pre_mat15", null, "---", htmlAttributes: new { @class = "form-control", id = "mat15" })
+                            @Html.ValidationMessageFor(model => model.pre_mat15, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_detalle_mat15", null, "---", htmlAttributes: new { @class = "form-control", id = "det_mat15" })
+                            @Html.ValidationMessageFor(model => model.pre_detalle_mat15, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("pre_espesor_mat15", null, "---", htmlAttributes: new { @class = "form-control", id = "esp_mat15" })
+                            @Html.ValidationMessageFor(model => model.pre_espesor_mat15, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_valor_mat15, new { htmlAttributes = new { @class = "form-control", id = "val_mat15", placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.pre_valor_mat15, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_cantidad_mat15, new { htmlAttributes = new { @class = "form-control", id = "can_mat15", placeholder = "Cantidad" } })
+                            @Html.ValidationMessageFor(model => model.pre_cantidad_mat15, "", new { @class = "text-danger" })
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.pre_neto_mat15, new { htmlAttributes = new { @class = "form-control", id = "net_mat15", placeholder = "Neto" } })
+                            @Html.ValidationMessageFor(model => model.pre_neto_mat15, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_ut15, new { htmlAttributes = new { @class = "form-control", id = "uti_mat15", @Value = "35" } })
+                            @Html.ValidationMessageFor(model => model.pre_ut15, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_mat15, new { htmlAttributes = new { @class = "form-control", id = "tot_mat15" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_mat15, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <input type="button" class="btn btn-danger btn-xs" id="eli_mat15" onclick="'eli_mat15()'" value="(-)Eliminar" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <h5>Sub Total</h5>
+                        </td>
+                        <td>
+                            <input type="number" id="sub_mat15" class="form-control" disabled />
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+                <table cellpadding="10" id="total_mat" align="right">
+                    <tr>
+                        <td><h5><strong> TOTAL MATERIALES</strong></h5></td>
+                        <td>
+                            @Html.EditorFor(model => model.total_materiales, new { htmlAttributes = new { @class = "form-control", id = "total_materiales" } })
+                            @Html.ValidationMessageFor(model => model.total_materiales, "", new { @class = "text-danger" })
+
+
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>FLETES</h4>
+            </div>
+            <div class="table table-responsive">
+                @* FLETES *@
+                <table cellpadding="10" id="tab_flete">
+                    <tr>
+                        <th>Valor</th>
+                        <th>Margen de contribución</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" id="val_flete"  class="form-control" placeholder="Valor" />
+
+                        </td>
+                        <td>
+                            <input type="number" id="ut_flete" value="35" class="form-control" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_total_flete, new { htmlAttributes = new { @class = "form-control", id = "pre_total_flete" } })
+                            @Html.ValidationMessageFor(model => model.pre_total_flete, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    </table>
+                </div>
+            </div>
+        <br />
+        <br />
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>MOTAJES</h4>
+            </div>
+            <div class="table table-responsive">
+                @* MONTAJE *@
+                <table cellpadding="10" id="tab_mont">
+                    <tr>
+                        <th>Valor</th>
+                        <th>Margen de contribución</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" id="val_monta" class="form-control" placeholder="Valor" />
+
+                        </td>
+                        <td>
+                            <input type="number" id="ut_monta" value="35" class="form-control" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_montaje, new { htmlAttributes = new { @class = "form-control", id= "pre_montaje" } })
+                            @Html.ValidationMessageFor(model => model.pre_montaje, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4>GASTOS VARIOS</h4>
+            </div>
+            <div class="table table-responsive">
+                @* VARIOS *@
+                <table cellpadding="10" id="tab_varios">
+                    <tr>
+                        <th>Valor</th>
+                        <th>Margen de contribución</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" id="val_varios" class="form-control" placeholder="Valor" />
+
+                        </td>
+                        <td>
+                            <input type="number" id="ut_varios" value="35" class="form-control" />
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.pre_varios, new { htmlAttributes = new { @class = "form-control", id= "pre_varios" } })
+                            @Html.ValidationMessageFor(model => model.pre_varios, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <table cellpadding="10" id="tab_totales">
+                    <tr>
+                        <td>
+                            <h4>TOTALES FINALES</h4>
+                        </td>
+                        <td>
+                            <input type="button" value="Calcular" onclick="acttotal()" class="btn btn-warning" />
+
+                        </td>
+                    </tr>
+                </table>
+               
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.pre_total_neto,"TOTAL NETO", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.pre_total_neto, new { htmlAttributes = new { @class = "form-control", id= "pre_total_neto" } })
+                    @Html.ValidationMessageFor(model => model.pre_total_neto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.pre_total_ut,"TOTAL MARGEN DE CONTRIBUCION", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.pre_total_ut, new { htmlAttributes = new { @class = "form-control", id= "pre_total_ut" } })
+                    @Html.ValidationMessageFor(model => model.pre_total_ut, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.pre_total_bruto,"TOTAL PRESUPUESTO", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.pre_total_bruto, new { htmlAttributes = new { @class = "form-control", id= "pre_total_bruto" } })
+                    @Html.ValidationMessageFor(model => model.pre_total_bruto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-6">
+                    <input type="submit" value="Guardar" onclick="acttotal()" class="btn btn-success" id="enviar"/>
+                </div>
+            </div>
+        </div>
+   </div>
+            }
+
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+                @Scripts.Render("~/Scripts/presupuestos_mo.js")
+                @Scripts.Render("~/Scripts/presupuestos_mat.js")
+                @Scripts.Render("~/Scripts/presupuestos_otros_gastos_presup.js")
+                @Scripts.Render("~/Scripts/total_presupuesto.js")
+            }
